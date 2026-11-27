@@ -1,0 +1,8 @@
+{
+    "users":
+    [
+        {"firstname": "Mohit", "lastname": "Patnaik"},
+        {"firstname": "Rahul", "lastname": "Sahu"},
+        {"firstname": "Rakesh", "lastname": "Pradhan"}
+    ]
+}
