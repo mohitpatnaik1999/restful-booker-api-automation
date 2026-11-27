@@ -11,10 +11,9 @@ payload = {
     "additionalneeds": "Breakfast,Lunch and Dinner"
 }
 
-base_url = "https://restful-booker.herokuapp.com/booking"
 
-def test_create_booking():
-    response=requests.post(base_url, json=payload)
+def test_create_booking(base_url,api_sessions):
+    response=api_sessions.post(f'{base_url}/booking', json=payload)
     data=response.json()
 
     print(data)
@@ -26,7 +25,7 @@ def test_create_booking():
     assert isinstance(data, dict)
     assert response.headers['Content-Type'] == 'application/json; charset=utf-8'
 
-    get_response=requests.get(f"{base_url}/{data['bookingid']}")
+    get_response=api_sessions.get(f"{base_url}/booking/{data['bookingid']}")
     get_existing_data=get_response.json()
     print(get_existing_data)
 
