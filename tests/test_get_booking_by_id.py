@@ -1,8 +1,6 @@
-url="https://restful-booker.herokuapp.com"
-
 import requests
-def test_get_booking_by_id():
-    response=requests.get(f'{url}/booking')
+def test_get_booking_by_id(base_url, api_sessions):
+    response=api_sessions.get(f'{base_url}/booking')
 
     assert response.status_code == 200
 
@@ -12,7 +10,7 @@ def test_get_booking_by_id():
     booking_id=booking_data[1]['bookingid']
 
     #booking_id is a path parameter which helps to get booking_id as specified.
-    response=requests.get(f'{url}/booking/{booking_id}')
+    response=api_sessions.get(f'{base_url}/booking/{booking_id}')
 
     assert "firstname" in response.json()
     assert "lastname" in response.json()

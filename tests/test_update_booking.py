@@ -1,5 +1,3 @@
-import requests, json
-
 payload = {
     "firstname": "Mohit",
     "lastname": "Patnaik",
@@ -12,10 +10,8 @@ payload = {
     "additionalneeds": "Breakfast,Lunch and Dinner"
 }
 
-base_url = "https://restful-booker.herokuapp.com/booking"
-
-def test_update_booking():
-    create_response=requests.post(base_url, json=payload)
+def test_update_booking(base_url, api_sessions):
+    create_response=api_sessions.post(f'{base_url}/booking', json=payload)
     create_data=create_response.json()
 
     assert create_response.status_code == 200
@@ -23,7 +19,7 @@ def test_update_booking():
 
     booking_id = create_data['bookingid']
 
-    new_url = f'{base_url}/{booking_id}'
+    new_url = f'{base_url}/booking/{booking_id}'
 
     new_payload = {
         "firstname": "Rahul",
@@ -37,7 +33,7 @@ def test_update_booking():
         "additionalneeds": "Breakfast"
     }
 
-    update_response=requests.put(new_url, 
+    update_response=api_sessions.put(new_url, 
                                  json=new_payload,
                                  headers={"Content-Type":"application/json"},
                                  auth=("admin","password123"))
