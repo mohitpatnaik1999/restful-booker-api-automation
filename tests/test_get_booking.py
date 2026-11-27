@@ -1,8 +1,5 @@
-import requests
-
-def test_get_booking():
-     url = "https://restful-booker.herokuapp.com/booking"
-     response=requests.get(url)
+def test_get_booking(base_url, api_sessions):
+     response=api_sessions.get(f'{base_url}/booking')
 
      data=response.json()
      print(response.status_code)
